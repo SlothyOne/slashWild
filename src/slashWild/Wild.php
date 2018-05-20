@@ -17,7 +17,7 @@ class Wild extends PluginBase {
 		$this->getLogger()->info("slashWild is enabled!");
 	}
 
-	public function onCommand(CommandSender $sender, Command $cmd, $label, array $param ) {
+	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
 		switch(strtolower($cmd->getName())){
 			case "wild":
 				if($sender->hasPermission("slashWild.command.wild")) {
@@ -26,15 +26,15 @@ class Wild extends PluginBase {
             					$y = rand(1,256);
 						$z = rand(1,350000);
 						$sender->teleport($sender->getLevel()->getSafeSpawn(new Vector3($x, $y, $z)));
-						$sender->sendTip("[slashWild] You've been teleported somewhere wild!");
-						$sender->sendMessage("[slashWild] teleporting to: X-$x Z-$z");
+						$sender->sendTip("You've been teleported somewhere wild!");
+						$sender->sendMessage("teleporting to: X-$x Z-$z");
 					}
 					else {
 						$sender->sendMessage("[slashWild] Only in-game!");
 					}
 				}
 				else {
-					$sender->sendMessage("[slashWild] You have no permission to use this command!");
+					$sender->sendMessage("You have no permission to use this command!");
 				}
 				return true;
 			break;
