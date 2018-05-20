@@ -22,9 +22,9 @@ class Wild extends PluginBase {
 			case "wild":
 				if($sender->hasPermission("slashWild.command.wild")) {
 					if($sender instanceof Player) {
-						$x = rand(1,10000);
+						$x = rand(-3000,3000);
             					$y = 95; //not too high and not too low to sufficate!
-						$z = rand(1,10000);
+						$z = rand(-3000,3000);
 						$sender->teleport($sender->getLevel()->getSafeSpawn(new Vector3($x, $y, $z)));
 						$sender->sendTip("You've been teleported somewhere wild!");
 						$sender->sendMessage("teleporting to: X-$x Z-$z");
