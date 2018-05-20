@@ -10,11 +10,12 @@ use pocketmine\Server;
 use pocketmine\Player;
 use pocketmine\level\{Level,Position,ChunkManager};
 use pocketmine\math\Vector3;
+use pocketmine\event\entity\EntityDamageEvent;
 
-class Wild extends PluginBase {
+class Wild extends PluginBase implements Listener{
 
 	public function onEnable() {
-		$this->getLogger()->info("slashWild is enabled!");
+		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
 	public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args) : bool{
@@ -41,6 +42,15 @@ class Wild extends PluginBase {
 
 		}
 	}
+	
+	public function onFall(EntityDamageEvent $event){
+    	$level = $event->getEntity()->getLevel();
+        $levelname = $level->getFolderName();
+        if($event->getCause() === EntityDamageEvent::CAUSE_FALL){
+        $event->setCancelled();
+       }
+}
+	
 	public function onDisable() {
 		$this->getLogger()->info("slashWild has been disabled!");
 	}
